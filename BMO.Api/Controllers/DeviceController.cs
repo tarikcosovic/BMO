@@ -9,13 +9,13 @@ namespace BMO.Api.Controllers
 {
     [ApiController]
     [Authorize("User")]
-    [Route("api/games")]
-    public class GameController : Controller
+    [Route("api/devices")]
+    public class DeviceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly ILogger<GameController> _logger;
+        private readonly ILogger<DeviceController> _logger;
         private readonly IMapper _mapper;
-        public GameController(IUnitOfWork unitOfWork, ILogger<GameController> logger, IMapper mapper)
+        public DeviceController(IUnitOfWork unitOfWork, ILogger<DeviceController> logger, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
             _logger = logger;
@@ -23,82 +23,86 @@ namespace BMO.Api.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateGameAsync(CreateGameRequest request)
+        public async Task<IActionResult> CreateDeviceAsync(CreateDeviceRequest request)
         {
             if (request == null)
                 return new BadRequestResult();
 
-            Game response = new();
+            Device response = new();
 
             try
             {
                 _mapper.Map(request, response);
 
-                await _unitOfWork.Games.AddAsync(response);
-
-                await _unitOfWork.SaveChangesAsync();
+                await _unitOfWork.Devices.AddAsync(response);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while making an api call: Create - Game");
+                _logger.LogError(ex, "Error while making an api call: Create - Device");
+            }
+            finally
+            {
+                await _unitOfWork.SaveChangesAsync();
+
+                _unitOfWork.Dispose();
             }
 
             return new JsonResult(response);
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetGamesAsync()
+        public async Task<IActionResult> GetDevicesAsync()
         {
-            IEnumerable<Game> response = Enumerable.Empty<Game>();
+            IEnumerable<Device> response = Enumerable.Empty<Device>();
 
             try
             {
-                response = await _unitOfWork.Games.GetAllAsync();
+                response = await _unitOfWork.Devices.GetAllAsync();
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while making an api call: GetAll - Game");
+                _logger.LogError(ex, "Error while making an api call: GetAll - Device");
             }
 
             return new JsonResult(response);
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetGameAsync(int id)
+        public async Task<IActionResult> GetDeviceAsync(int id)
         {
-            Game? response = null;
+            Device? response = null;
 
             try
             {
-                response = await _unitOfWork.Games.GetAsync(id);
+                response = await _unitOfWork.Devices.GetAsync(id);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error while making an api call: GetById - Game");
+                _logger.LogError(ex, "Error while making an api call: GetById - Device");
             }
 
             return new JsonResult(response);
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteGameAsync(int id)
+        public async Task<IActionResult> DeleteDeviceAsync(int id)
         {
-            Game? response = null;
+            Device? response = null;
 
             try
             {
-                response = await _unitOfWork.Games.GetAsync(id);
+                response = await _unitOfWork.Devices.GetAsync(id);
 
                 if (response is not null)
                 {
-                    _unitOfWork.Games.Remove(response);
+                    _unitOfWork.Devices.Remove(response);
 
                     await _unitOfWork.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Error while making an api call: Delete Game with id: {id}");
+                _logger.LogError(ex, $"Error while making an api call: Delete Device with id: {id}");
             }
 
             return new JsonResult(response);
