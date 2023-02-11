@@ -1,4 +1,5 @@
 using AutoMapper;
+using BMO.Api;
 using BMO.Api.Configuration;
 using BMO.Api.Mappings;
 using BMO.Api.Models;
@@ -27,6 +28,18 @@ builder.Services.AddLogging(config =>
     config.AddConsole();
 });
 
+//register custom authentication middleware
+builder.Services.AddAuthentication("Basic").AddScheme<BasicAuthenticationOption, BasicAuthenticationHandler>("Basic", null);
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("User",
+        authBuilder =>
+        {
+            authBuilder.RequireRole("Administrator");
+        });
+});
+
 //register autoMapper
 builder.Services.AddAutoMapper((typeof(GameProfile).Assembly));
 
@@ -44,6 +57,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 

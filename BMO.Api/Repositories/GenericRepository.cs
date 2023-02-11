@@ -14,7 +14,7 @@ namespace BMO.Api.Repositories
         }
 
         public void Add(TEntity entity) => _dbContext.Set<TEntity>().Add(entity);
-        public async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
+        public virtual async Task AddAsync(TEntity entity, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().AddAsync(entity, cancellationToken);
 
         public void AddRange(IEnumerable<TEntity> entities) => _dbContext.Set<TEntity>().AddRange(entities);
         public async void AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().AddRangeAsync(entities, cancellationToken);
