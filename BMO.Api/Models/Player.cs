@@ -11,5 +11,14 @@
         //navigation properties
         public List<Score> Scores { get; set; }
         public Device Device { get; set; }
+
+        public Player() { }
+
+        public Player(int id, int deviceId, string username)
+        {
+            Id = id;
+            DeviceId = deviceId;
+            Username = username;
+        }
     }
 }

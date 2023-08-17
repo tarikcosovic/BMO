@@ -1,6 +1,4 @@
-using AutoMapper;
 using BMO.Api;
-using BMO.Api.Configuration;
 using BMO.Api.Mappings;
 using BMO.Api.Models;
 using BMO.Api.Repositories;

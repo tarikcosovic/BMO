@@ -23,6 +23,12 @@ namespace BMO.Api.Configuration
 
             builder.Property(prop => prop.LastModifiedDate)
                 .HasDefaultValue(DateTime.UtcNow);
+
+            builder.HasData(
+                new Player(1, 1, "sonic86"),
+                new Player(2, 2, "john doe"),
+                new Player(3, 3, "replicantroy")
+            );
         }
     }
 }

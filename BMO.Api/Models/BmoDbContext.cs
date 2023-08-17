@@ -9,7 +9,9 @@ namespace BMO.Api.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(GameConfiguration).Assembly);
+            modelBuilder.ApplyConfiguration(new DeviceConfiguration());
+            modelBuilder.ApplyConfiguration(new PlayerConfiguration());
+            modelBuilder.ApplyConfiguration(new GameConfiguration());
         }
 
         //Register Sets

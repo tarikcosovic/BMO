@@ -4,6 +4,7 @@
     {
         DeviceRepository Devices { get; }
         GameRepository Games { get; }
+        PlayerRepository Players { get; }
         void SaveChanges();
         Task SaveChangesAsync();
     }
