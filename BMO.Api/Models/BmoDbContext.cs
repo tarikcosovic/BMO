@@ -12,6 +12,7 @@ namespace BMO.Api.Models
             modelBuilder.ApplyConfiguration(new DeviceConfiguration());
             modelBuilder.ApplyConfiguration(new PlayerConfiguration());
             modelBuilder.ApplyConfiguration(new GameConfiguration());
+            modelBuilder.ApplyConfiguration(new ScoreConfiguration());
         }
 
         //Register Sets

@@ -13,6 +13,7 @@ namespace BMO.Api.Repositories
             Devices = new DeviceRepository(dbContext);
             Games = new GameRepository(dbContext);
             Players = new PlayerRepository(dbContext);
+            Scores = new ScoreRepository(dbContext);
         }
 
         public void Dispose()
@@ -33,5 +34,6 @@ namespace BMO.Api.Repositories
         public DeviceRepository Devices { get; private set; }
         public GameRepository Games { get; private set; }
         public PlayerRepository Players {get; private set; }
+        public ScoreRepository Scores {get; private set; }
     }
 }

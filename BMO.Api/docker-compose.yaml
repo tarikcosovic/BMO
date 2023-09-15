@@ -1,0 +1,27 @@
+﻿version: '3'
+
+services:
+
+  bmo-api:
+    container_name: bmo-api
+    image: tarikcosovic/bmo-api:latest
+    ports:
+      - "8080:80"  # Map host port 8080 to container port 80
+    depends_on:
+      - bmo-database  # Ensure the 'bmo-database' service (SQL Server) is started first
+    environment:
+      - BMO_Database_Server=bmo-database
+      - BMO_Database_Port=1433
+      - BMO_Database_Name=BMO
+      - BMO_Database_Username=sa
+      - BMO_Database_Password=Database!2023
+      - ASPNETCORE_ENVIRONMENT=Development
+
+  bmo-database:
+    container_name: bmo-database
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+    - 1450:1433
+    environment:
+      SA_PASSWORD: Database!2023
+      ACCEPT_EULA: Y

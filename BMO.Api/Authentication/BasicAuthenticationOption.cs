@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 
-namespace BMO.Api
+namespace BMO.Api.Authentication
 {
     internal class BasicAuthenticationOption : AuthenticationSchemeOptions
     {

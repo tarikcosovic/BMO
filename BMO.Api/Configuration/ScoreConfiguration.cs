@@ -8,15 +8,17 @@ namespace BMO.Api.Configuration
     {
         public void Configure(EntityTypeBuilder<Score> builder)
         {
-            builder.HasKey(key => new {key.PlayerId, key.GameId});
+            builder.HasKey(key => key.ScoreId);
 
             builder.HasOne(pt => pt.Player)
                 .WithMany(p => p.Scores)
-                .HasForeignKey(fk => fk.PlayerId);
+                .HasForeignKey(fk => fk.PlayerId)
+                .IsRequired();
 
             builder.HasOne(pt => pt.Game)
                 .WithMany(p => p.Scores)
-                .HasForeignKey(fk => fk.GameId);
+                .HasForeignKey(fk => fk.GameId)
+                .IsRequired();
 
             builder.Property(prop => prop.Value)
                 .IsRequired();
