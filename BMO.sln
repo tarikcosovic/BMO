@@ -10,6 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BMO.Tests", "BMO.Tests\BMO.Tests.csproj", "{83D403AD-F1DE-4337-AB10-259D38E1527F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A7097486-9676-4F2B-98CE-A73EA6014A7B} = {A7097486-9676-4F2B-98CE-A73EA6014A7B}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +25,10 @@ Global
 		{A7097486-9676-4F2B-98CE-A73EA6014A7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7097486-9676-4F2B-98CE-A73EA6014A7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7097486-9676-4F2B-98CE-A73EA6014A7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83D403AD-F1DE-4337-AB10-259D38E1527F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83D403AD-F1DE-4337-AB10-259D38E1527F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83D403AD-F1DE-4337-AB10-259D38E1527F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83D403AD-F1DE-4337-AB10-259D38E1527F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

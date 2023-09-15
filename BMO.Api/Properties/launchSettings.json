@@ -1,4 +1,25 @@
-﻿{
+{
+  "profiles": {
+    "BMO.Api": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": true,
+      "applicationUrl": "https://localhost:7197;http://localhost:4200",
+      "nativeDebugging": true,
+      "sqlDebugging": true
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "environmentVariables": {
+        "BMO-Database": "Server=.,1433;Database=BMO;User Id=sa;Password=Database!2023;Integrated Security=false;"
+      },
+      "publishAllPorts": true,
+      "useSSL": true
+    }
+  },
   "$schema": "https://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
@@ -6,18 +27,6 @@
     "iisExpress": {
       "applicationUrl": "http://localhost:43575",
       "sslPort": 44365
-    }
-  },
-  "profiles": {
-    "BMO.Api": {
-      "commandName": "Project",
-      "dotnetRunMessages": true,
-      //"launchBrowser": true,
-      //"launchUrl": "swagger",
-      "applicationUrl": "https://localhost:7197;http://localhost:4200",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      }
     }
   }
 }

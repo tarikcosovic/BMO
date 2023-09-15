@@ -4,6 +4,7 @@ namespace BMO.Api.Models
 {
     public class Score
     {
+        public long ScoreId { get; set; }
         public int Value { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
 
