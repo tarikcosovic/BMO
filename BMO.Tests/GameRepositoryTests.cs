@@ -1,18 +1,40 @@
-using BMO.Api.Migrations;
-using Microsoft.EntityFrameworkCore;
-using NSubstitute.ReturnsExtensions;
 using System.Linq.Expressions;
 
 namespace BMO.Tests
 {
     public class GameRepositoryTests
     {
-        //TODO: THINK AGAIN ABOUT TESTING ADD AND ADDASYNC same for remove
         private readonly IGenericRepository<Game> _gameRepository;
 
         public GameRepositoryTests()
         {
             _gameRepository = Substitute.For<IGenericRepository<Game>>();
+        }
+
+        [Fact]
+        public void Add_ShouldAddGameToDbContext()
+        {
+            //Arrange
+            var mockGame = new Game();
+
+            //Act
+            _gameRepository.Add(mockGame);
+
+            //Assert
+            _gameRepository.Received(1).Add(mockGame);
+        }
+
+        [Fact]
+        public async Task AddAsync_ShouldAsyncAddGameToDbContext()
+        {
+            //Arrange
+            var mockGame = new Game();
+
+            //Act
+            await _gameRepository.AddAsync(mockGame);
+
+            //Assert
+            await _gameRepository.Received(1).AddAsync(mockGame);
         }
 
         [Fact]
@@ -97,6 +119,19 @@ namespace BMO.Tests
 
             //Assert
             Assert.Null(result);
+        }
+
+        [Fact]
+        public void Remove_ShouldRemoveGameFromDbContext()
+        {
+            //Arrange
+            var mockGame = new Game();
+
+            //Act
+            _gameRepository.Remove(mockGame);
+
+            //Assert
+            _gameRepository.Received(1).Remove(mockGame);
         }
     }
 }
