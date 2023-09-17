@@ -23,6 +23,6 @@ namespace BMO.Api.Repositories
             return entity;
         }
 
-        public IEnumerable<Device> GetDevicesWithoutWarranty() => BmodbContext.Devices.Where(x => !x.Warranty).ToList();
+        public virtual IEnumerable<Device> GetDevicesWithoutWarranty() => BmodbContext.Devices.Where(x => !x.Warranty).ToList();
     }
 }
