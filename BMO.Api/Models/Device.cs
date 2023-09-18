@@ -2,8 +2,7 @@
 {
     public class Device
     {
-        public int Id { get; set; }
-        public string SerialNumber { get; set; }
+        public Guid Id { get; set; }
         public string ProductionModel { get; set; } = string.Empty;
         public string SoftwareVersion { get; set; } = string.Empty;
         public bool Warranty { get; set; } = false;
@@ -18,10 +17,9 @@
 
         }
 
-        public Device(int id, string serialNumber, string productionModel, string softwareVersion, bool warranty)
+        public Device(Guid id, string productionModel, string softwareVersion, bool warranty)
         {
             Id = id;
-            SerialNumber = serialNumber;
             ProductionModel = productionModel;
             SoftwareVersion = softwareVersion;
             Warranty = warranty;

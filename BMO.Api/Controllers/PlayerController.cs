@@ -30,6 +30,7 @@ namespace BMO.Api.Controllers
         /// <returns></returns>
 
         [HttpPost("create")]
+        [Authorize("User")]
         public async Task<IActionResult> CreateUserAsync(CreatePlayerRequest request)
         {
             if (request == null)
@@ -54,7 +55,7 @@ namespace BMO.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize("User")]
+        [Authorize("Administrator")]
         public async Task<IActionResult> GetUsersAsync()
         {
             IEnumerable<Player> response = Enumerable.Empty<Player>();
@@ -71,9 +72,8 @@ namespace BMO.Api.Controllers
             return new JsonResult(response);
         }
 
-
         [HttpGet("{id}")]
-        [Authorize("User")]
+        [Authorize("Administrator")]
         public async Task<IActionResult> GetUserAsync(int id)
         {
             Player? response = null;
@@ -90,19 +90,19 @@ namespace BMO.Api.Controllers
             return new JsonResult(response);
         }
 
-        [Authorize("Admin")]
+        [Authorize("Administrator")]
         [HttpDelete("delete/{id}")]
         public async Task<IActionResult> DeleteUserAsync(int id)
         {
-            Game? response = null;
+            Player? response = null;
 
             try
             {
-                response = await _unitOfWork.Games.GetAsync(id);
+                response = await _unitOfWork.Players.GetAsync(id);
 
                 if (response is not null)
                 {
-                    _unitOfWork.Games.Remove(response);
+                    _unitOfWork.Players.Remove(response);
 
                     await _unitOfWork.SaveChangesAsync();
                 }

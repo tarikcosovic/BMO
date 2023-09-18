@@ -25,9 +25,9 @@ namespace BMO.Api.Configuration
                 .HasDefaultValue(DateTime.UtcNow);
 
             builder.HasData(
-                new Player(1, 1, "sonic86"),
-                new Player(2, 2, "john doe"),
-                new Player(3, 3, "replicantroy")
+                new Player(1, new Guid("1e33293d-84d1-406b-ae55-793ed59937d7"), "sonic86"),
+                new Player(2, new Guid("53116ce8-5619-11ee-8c99-0242ac120002"), "john doe"),
+                new Player(3, new Guid("b59f060c-eea2-4d3e-9b5c-4b175a92504f"), "replicantroy")
             );
         }
     }

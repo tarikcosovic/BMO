@@ -22,6 +22,7 @@ namespace BMO.Api.Controllers
         }
 
         [HttpPost("create")]
+        [Authorize("User")]
         public async Task<IActionResult> CreateScoreAsync(CreateScoreRequest request)
         {
             if (request == null)
@@ -46,14 +47,26 @@ namespace BMO.Api.Controllers
         }
 
         [HttpGet]
-        [Authorize("User")]
-        public async Task<IActionResult> GetScoresAsync()
+        public async Task<IActionResult> GetScoresAsync(int gameId = 0, int playerId = 0)
         {
             IEnumerable<Score> response = Enumerable.Empty<Score>();
 
             try
             {
-                response = await _unitOfWork.Scores.GetAllAsync();
+                //Performance task - filter the data on ef level, not when you've already returned all of the objects
+                var query = await _unitOfWork.Scores.GetAllAsync();
+
+                if (gameId != 0)
+                {
+                    query = query.Where(x => x.GameId == gameId);
+                }
+
+                if (playerId != 0)
+                {
+                    query = query.Where(x => x.PlayerId == playerId);
+                }
+
+                response = query.ToList();
             }
             catch (Exception ex)
             {
@@ -65,8 +78,7 @@ namespace BMO.Api.Controllers
 
 
         [HttpGet("{id}")]
-        [Authorize("User")]
-        public async Task<IActionResult> GetScoreAsync(int id)
+        public async Task<IActionResult> GetScoreAsync(long id)
         {
             Score? response = null;
 

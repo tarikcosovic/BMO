@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BMO.Api.Migrations
 {
     [DbContext(typeof(BmodbContext))]
-    [Migration("20230823143837_ScoreTableAddPK")]
-    partial class ScoreTableAddPK
+    [Migration("20230918125845_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,27 +26,21 @@ namespace BMO.Api.Migrations
 
             modelBuilder.Entity("BMO.Api.Models.Device", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2726));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(6974));
 
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2816));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7062));
 
                     b.Property<string>("ProductionModel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SerialNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -64,31 +58,109 @@ namespace BMO.Api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2849),
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2850),
+                            Id = new Guid("1e33293d-84d1-406b-ae55-793ed59937d7"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7102),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7102),
                             ProductionModel = "Standard",
-                            SerialNumber = "5c2f5351-d30a-40fb-9a87-ada20b610c2d",
                             SoftwareVersion = "2.7.4",
                             Warranty = false
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2852),
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2852),
-                            ProductionModel = "Premium",
-                            SerialNumber = "28e47bae-64e2-4fbf-9c3a-249dd8bff154",
+                            Id = new Guid("53116ce8-5619-11ee-8c99-0242ac120002"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7104),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7104),
+                            ProductionModel = "Standard",
                             SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("b59f060c-eea2-4d3e-9b5c-4b175a92504f"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7105),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7105),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("b5e2f724-ec83-4949-a489-8df81aba91ee"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7106),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7106),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("312f481a-7d97-4905-8aaa-f7a73bd91e6c"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7107),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7107),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("2a7fe1f3-1883-4587-afb4-26c15b6d8741"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7108),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7108),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("f11c94c8-08f1-463f-8b04-6f0d080ae94c"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7109),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7109),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "2.7.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("766c729a-e197-4344-b24a-9a3f3a4da25a"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7110),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7110),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "3.0.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("8c020a8e-0694-4114-92d3-8791f7929c05"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7111),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7111),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "3.0.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("5c2f5351-d30a-40fb-9a87-ada20b610c2d"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7112),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7112),
+                            ProductionModel = "Standard",
+                            SoftwareVersion = "3.0.4",
+                            Warranty = false
+                        },
+                        new
+                        {
+                            Id = new Guid("28e47bae-64e2-4fbf-9c3a-249dd8bff154"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7112),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7113),
+                            ProductionModel = "Premium",
+                            SoftwareVersion = "3.0.4",
                             Warranty = true
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2852),
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(2853),
+                            Id = new Guid("12fabb0a-a8da-4884-b062-31950a6ed997"),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7113),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7114),
                             ProductionModel = "Deluxe",
-                            SerialNumber = "12fabb0a-a8da-4884-b062-31950a6ed997",
                             SoftwareVersion = "3.0.4",
                             Warranty = true
                         });
@@ -105,7 +177,7 @@ namespace BMO.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3728));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7896));
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -115,7 +187,7 @@ namespace BMO.Api.Migrations
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3794));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7962));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -130,25 +202,25 @@ namespace BMO.Api.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3821),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7989),
                             Description = "An omage to one of the earliest video games released, the goal is to pan across a screen and shoot descending swarms of aliens, preventing them from reaching the bottom of the screen.",
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3821),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7989),
                             Name = "Space Invaders"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3823),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7990),
                             Description = "The player controls a long, thin creature, resembling a snake, which roams(grid-based) around on a bordered plane, picking up food, trying to avoid hitting its own tail or the edges of the playing area. Each time the snake eats a piece of food, its tail grows longer, making the game increasingly difficult.",
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3824),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7991),
                             Name = "Snake"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3825),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7991),
                             Description = "World first BMO exclusive original game, specifically created for this game console. Space Worms is a grid-based puzzle, where each players move will take them to the edge of the grid. Collect the treasure to advance to the next level and achieve an all time highscore on the leaderboards!",
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3825),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7992),
                             Name = "Space Worms"
                         });
                 });
@@ -164,15 +236,15 @@ namespace BMO.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3353));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7655));
 
-                    b.Property<int>("DeviceId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("DeviceId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("LastModifiedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3496));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7736));
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -189,25 +261,25 @@ namespace BMO.Api.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3564),
-                            DeviceId = 1,
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3565),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7767),
+                            DeviceId = new Guid("1e33293d-84d1-406b-ae55-793ed59937d7"),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7768),
                             Username = "sonic86"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3566),
-                            DeviceId = 2,
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3567),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7769),
+                            DeviceId = new Guid("53116ce8-5619-11ee-8c99-0242ac120002"),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7770),
                             Username = "john doe"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3567),
-                            DeviceId = 3,
-                            LastModifiedDate = new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(3567),
+                            CreatedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7770),
+                            DeviceId = new Guid("b59f060c-eea2-4d3e-9b5c-4b175a92504f"),
+                            LastModifiedDate = new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(7771),
                             Username = "replicantroy"
                         });
                 });
@@ -223,7 +295,7 @@ namespace BMO.Api.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2023, 8, 23, 14, 38, 37, 812, DateTimeKind.Utc).AddTicks(4598));
+                        .HasDefaultValue(new DateTime(2023, 9, 18, 12, 58, 45, 349, DateTimeKind.Utc).AddTicks(8580));
 
                     b.Property<int>("GameId")
                         .HasColumnType("int");

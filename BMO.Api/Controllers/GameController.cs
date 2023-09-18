@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BMO.Api.Controllers
 {
     [ApiController]
-    [Authorize("User")]
+    [Authorize("Administrator")]
     [Route("api/games")]
     public class GameController : Controller
     {

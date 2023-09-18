@@ -18,12 +18,12 @@ namespace BMO.Tests
         public async Task AddAsync_ShouldReturnAddedDevice()
         {
             //arrange
-            var expectedDevice = new Device { Id = 1, ProductionModel = "Test_Model", SerialNumber = "Test_Serial_Number", Warranty = true };
+            var expectedDevice = new Device { Id = new Guid("bc9f060c-eea2-4d3e-9d5c-4b175a92504f"), ProductionModel = "Test_Model", Warranty = true };
 
             _deviceRepository.AddAsync(Arg.Any<Device>(), Arg.Any<CancellationToken>()).Returns(Task.FromResult(expectedDevice), default);
 
             //act
-            var mockDevice = new Device { Id = 2, ProductionModel = "Test_Model_2", SerialNumber = "Test_Serial_Number_2", Warranty = true };
+            var mockDevice = new Device { Id = new Guid("bc9f060c-eea2-4d3e-9d5c-4b175a92504f"), ProductionModel = "Test_Model_2", Warranty = true };
 
             var actualDevice = await _deviceRepository.AddAsync(mockDevice, default);
 
@@ -39,9 +39,9 @@ namespace BMO.Tests
             //Arrange
             var expectedDevices = new List<Device>
             {
-                new Device { Id = 1, ProductionModel = "Test_Model", SerialNumber = "Test_Serial_Number", Warranty = false },
-                new Device { Id = 2, ProductionModel = "Test_Model_2", SerialNumber = "Test_Serial_Number_2", Warranty = false },
-                new Device { Id = 3, ProductionModel = "Test_Model_3", SerialNumber = "Test_Serial_Number_3", Warranty = false },
+                new Device { Id = new Guid("bc9f060c-eea2-4d3e-9d5c-4b175a92504f"), ProductionModel = "Test_Model", Warranty = false },
+                new Device { Id = new Guid("b59f060c-eea2-4d3e-9b5c-4b175a92504f"), ProductionModel = "Test_Model_2", Warranty = false },
+                new Device { Id = new Guid("53116ce8-5619-11ee-8c99-0242ac120002"), ProductionModel = "Test_Model_3", Warranty = false },
             };
 
             _deviceRepository.GetDevicesWithoutWarranty().Returns(expectedDevices);
@@ -64,7 +64,6 @@ namespace BMO.Tests
 
                 return x.Id == y.Id
                     && x.ProductionModel == y.ProductionModel
-                    && x.SerialNumber == y.SerialNumber
                     && x.Warranty == y.Warranty;
             }
 
