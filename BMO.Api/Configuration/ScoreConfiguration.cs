@@ -13,11 +13,13 @@ namespace BMO.Api.Configuration
             builder.HasOne(pt => pt.Player)
                 .WithMany(p => p.Scores)
                 .HasForeignKey(fk => fk.PlayerId)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .IsRequired();
 
             builder.HasOne(pt => pt.Game)
                 .WithMany(p => p.Scores)
                 .HasForeignKey(fk => fk.GameId)
+                .OnDelete(DeleteBehavior.ClientCascade)
                 .IsRequired();
 
             builder.Property(prop => prop.Value)

@@ -2,9 +2,9 @@
 {
     public class CreatePlayerRequest
     {
-        public int Id { get; set; }
-        public int DeviceId { get; set; }
+        //The deviceId of the players' device
         public string Username { get; set; }
+        public Guid DeviceId { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime LastModifiedDate { get; set; } = DateTime.UtcNow;
     }

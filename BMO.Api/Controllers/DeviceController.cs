@@ -68,7 +68,7 @@ namespace BMO.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetDeviceAsync(int id)
+        public async Task<IActionResult> GetDeviceAsync(Guid id)
         {
             Device? response = null;
 
@@ -85,7 +85,7 @@ namespace BMO.Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public async Task<IActionResult> DeleteDeviceAsync(int id)
+        public async Task<IActionResult> DeleteDeviceAsync(Guid id)
         {
             Device? response = null;
 

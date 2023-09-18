@@ -24,9 +24,10 @@ namespace BMO.Api.Authentication
             }
 
             var claims = Array.Empty<Claim>;
+            var isGuid = Guid.TryParse(Request.Headers["Authorization"].ToString(), out var authenticationKey);
 
             //Checks if the device is a registered bmo-device with a working serial
-            if (_unitOfWork.Devices.Where(x => x.SerialNumber == Request.Headers["Authorization"].ToString()).Count() > 0)
+            if (isGuid && _unitOfWork.Devices.Where(x => x.Id == authenticationKey).Count() > 0)
             {
                 return await CreateAuthenticationIdentity(new List<Claim> { new Claim(ClaimTypes.Role, "User") });
 

@@ -16,7 +16,6 @@ namespace BMO.Api.Repositories
         {
             entity.LastModifiedDate= DateTime.UtcNow;
             entity.CreatedDate= DateTime.UtcNow;
-            entity.SerialNumber = Guid.NewGuid().ToString();
 
             await base.AddAsync(entity, cancellationToken);
 

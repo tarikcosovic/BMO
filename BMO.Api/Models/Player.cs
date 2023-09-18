@@ -3,7 +3,7 @@
     public class Player
     {
         public int Id { get; set; }
-        public int DeviceId { get; set; }
+        public Guid DeviceId { get; set; }
         public string Username { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.UtcNow;
         public DateTime LastModifiedDate { get; set; } = DateTime.UtcNow;
@@ -14,7 +14,7 @@
 
         public Player() { }
 
-        public Player(int id, int deviceId, string username)
+        public Player(int id, Guid deviceId, string username)
         {
             Id = id;
             DeviceId = deviceId;

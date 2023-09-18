@@ -15,6 +15,8 @@ namespace BMO.Api.Repositories
 
         TEntity? Get(int id);
         Task<TEntity?> GetAsync(int id, CancellationToken cancellationToken = default);
+        Task<TEntity?> GetAsync(long id, CancellationToken cancellationToken = default);
+        Task<TEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
         IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
 

@@ -21,6 +21,8 @@ namespace BMO.Api.Repositories
 
         public TEntity? Get(int id) => _dbContext.Set<TEntity>().Find(id);
         public async Task<TEntity?> GetAsync(int id, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+        public async Task<TEntity?> GetAsync(long id, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
+        public async Task<TEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
 
         public IEnumerable<TEntity> GetAll() => _dbContext.Set<TEntity>().ToList();
         public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
