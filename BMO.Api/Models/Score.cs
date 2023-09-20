@@ -13,5 +13,17 @@ namespace BMO.Api.Models
 
         public int PlayerId { get; set; }
         public Player Player { get; set; }
+
+        public Score()
+        {
+
+        }
+        public Score(long scoreId, int gameId, int playerId, int value)
+        {
+            ScoreId = scoreId;
+            GameId = gameId;
+            PlayerId = playerId;
+            Value = value;
+        }
     }
 }
