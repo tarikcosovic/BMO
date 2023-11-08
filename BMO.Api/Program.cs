@@ -3,11 +3,14 @@ using BMO.Api.Mappings;
 using BMO.Api.Migrations;
 using BMO.Api.Models;
 using BMO.Api.Repositories;
+using BMO.Api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 //register db context
 builder.Services.AddDbContext<BmodbContext>(opt =>
@@ -26,6 +29,18 @@ builder.Services.AddLogging(config =>
     config.AddConsole();
 });
 
+//register cors
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        builder =>
+        {
+            builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
+        });
+});
 //register custom authentication middleware
 builder.Services.AddAuthentication("Basic").AddScheme<BasicAuthenticationOption, BasicAuthenticationHandler>("Basic", null);
 
@@ -34,13 +49,13 @@ builder.Services.AddAuthorization(options =>
     options.AddPolicy("User",
         authBuilder =>
         {
-            authBuilder.RequireRole("User");
+            authBuilder.RequireRole("User").Build();
         });
 
     options.AddPolicy("Administrator",
       authBuilder =>
       {
-          authBuilder.RequireRole("Administrator");
+          authBuilder.RequireRole("Administrator").Build();
       });
 });
 
@@ -60,6 +75,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("AllowAll");
+
 app.UseHttpsRedirection();
 
 app.UseAuthentication();

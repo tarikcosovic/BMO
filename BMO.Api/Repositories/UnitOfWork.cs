@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BMO.Api.Models;
+using BMO.Api.Repositories.Interfaces;
 
 namespace BMO.Api.Repositories
 {

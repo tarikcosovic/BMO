@@ -1,8 +1,8 @@
 ﻿using BMO.Api.Models;
 
-namespace BMO.Api.Repositories
+namespace BMO.Api.Repositories.Interfaces
 {
-    public interface IDeviceRepository : IGenericRepository<Device>
+    public interface IDeviceRepository
     {
         IEnumerable<Device> GetDevicesWithoutWarranty();
     }

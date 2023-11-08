@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using BMO.Api.Repositories.Interfaces;
 
 namespace BMO.Tests
 {
@@ -84,7 +85,7 @@ namespace BMO.Tests
         }
 
         [Fact]
-        public void Where_ShouldReturnGames_WhenGameMatchesCriteria()
+        public async Task Where_ShouldReturnGames_WhenGameMatchesCriteria()
         {
             //Arrange
             var expectedGames = new List<Game>() 
@@ -96,14 +97,14 @@ namespace BMO.Tests
             _gameRepository.Where(Arg.Any<Expression<Func<Game, bool>>>())
                 .Returns(expectedGames);
             //Act
-            var result = _gameRepository.Where(x => x.Name == "Test_Game");
+            var result = await _gameRepository.Where(x => x.Name == "Test_Game");
 
             //Assert
             Assert.True(result.Any());
         }
 
         [Fact]
-        public void Where_ShouldReturnNull_WhenNoGameMatchesCriteria()
+        public async Task Where_ShouldReturnNull_WhenNoGameMatchesCriteria()
         {
             //Arrange
             var expectedGames = new List<Game>()
@@ -115,7 +116,7 @@ namespace BMO.Tests
             _gameRepository.Where(Arg.Any<Expression<Func<Game, bool>>>())
                 .ReturnsNull();
             //Act
-            var result = _gameRepository.Where(x => x.Id == 999);
+            var result = await _gameRepository.Where(x => x.Id == 999);
 
             //Assert
             Assert.Null(result);

@@ -1,5 +1,5 @@
 ﻿using BMO.Api.Models;
-using Microsoft.EntityFrameworkCore;
+using BMO.Api.Repositories.Interfaces;
 
 namespace BMO.Api.Repositories
 {

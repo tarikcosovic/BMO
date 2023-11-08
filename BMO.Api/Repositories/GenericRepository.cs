@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BMO.Api.Models;
+using BMO.Api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -24,10 +25,10 @@ namespace BMO.Api.Repositories
         public async Task<TEntity?> GetAsync(long id, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
         public async Task<TEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().FindAsync(new object[] { id }, cancellationToken);
 
-        public IEnumerable<TEntity> GetAll() => _dbContext.Set<TEntity>().ToList();
+        public async Task<IEnumerable<TEntity>> GetAll(CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
         public async Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().ToListAsync(cancellationToken);
 
-        public IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate) => _dbContext.Set<TEntity>().Where(predicate);
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default) => await _dbContext.Set<TEntity>().Where(predicate).ToListAsync(cancellationToken);
 
         public void Remove(TEntity entity) => _dbContext.Set<TEntity>().Remove(entity);
         public void RemoveRange(IEnumerable<TEntity> entities) => _dbContext.Set<TEntity>().RemoveRange(entities);

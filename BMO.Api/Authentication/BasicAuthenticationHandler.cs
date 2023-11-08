@@ -1,4 +1,5 @@
 ﻿using BMO.Api.Repositories;
+using BMO.Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
 using System.Net.Http.Headers;
@@ -27,7 +28,7 @@ namespace BMO.Api.Authentication
             var isGuid = Guid.TryParse(Request.Headers["Authorization"].ToString(), out var authenticationKey);
 
             //Checks if the device is a registered bmo-device with a working serial
-            if (isGuid && _unitOfWork.Devices.Where(x => x.Id == authenticationKey).Count() > 0)
+            if (isGuid && _unitOfWork.Devices.Where(x => x.Id == authenticationKey).Result.Count() > 0)
             {
                 return await CreateAuthenticationIdentity(new List<Claim> { new Claim(ClaimTypes.Role, "User") });
 

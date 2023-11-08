@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace BMO.Api.Repositories
+namespace BMO.Api.Repositories.Interfaces
 {
     public interface IGenericRepository<TEntity> where TEntity : class
     {
@@ -10,7 +10,7 @@ namespace BMO.Api.Repositories
         void AddRange(IEnumerable<TEntity> entities);
         void AddRangeAsync(IEnumerable<TEntity> entities, CancellationToken cancellationToken = default);
 
-        IEnumerable<TEntity> GetAll();
+        Task<IEnumerable<TEntity>> GetAll(CancellationToken cancellationToken = default);
         Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken = default);
 
         TEntity? Get(int id);
@@ -18,7 +18,7 @@ namespace BMO.Api.Repositories
         Task<TEntity?> GetAsync(long id, CancellationToken cancellationToken = default);
         Task<TEntity?> GetAsync(Guid id, CancellationToken cancellationToken = default);
 
-        IEnumerable<TEntity> Where(Expression<Func<TEntity, bool>> predicate);
+        Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
 
         void Remove(TEntity entity);
         void RemoveRange(IEnumerable<TEntity> entity);
