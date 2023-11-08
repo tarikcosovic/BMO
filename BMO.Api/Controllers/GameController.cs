@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BMO.Api.Models;
 using BMO.Api.Models.Requests;
-using BMO.Api.Repositories;
+using BMO.Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,6 +46,7 @@ namespace BMO.Api.Controllers
             return new JsonResult(response);
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetGamesAsync()
         {
@@ -63,6 +64,7 @@ namespace BMO.Api.Controllers
             return new JsonResult(response);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetGameAsync(int id)
         {
@@ -71,6 +73,11 @@ namespace BMO.Api.Controllers
             try
             {
                 response = await _unitOfWork.Games.GetAsync(id);
+
+                if(response == null)
+                {
+                    return new NotFoundResult();
+                }
             }
             catch (Exception ex)
             {
@@ -95,6 +102,7 @@ namespace BMO.Api.Controllers
 
                     await _unitOfWork.SaveChangesAsync();
                 }
+                else return new NotFoundResult();
             }
             catch (Exception ex)
             {

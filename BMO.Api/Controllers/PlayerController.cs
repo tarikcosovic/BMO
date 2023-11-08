@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using BMO.Api.Models;
 using BMO.Api.Models.Requests;
-using BMO.Api.Repositories;
+using BMO.Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,11 +40,20 @@ namespace BMO.Api.Controllers
 
             try
             {
-                _mapper.Map(request, response);
+                var existingUsername = (await _unitOfWork.Players.Where(x => x.Username == request.Username)).FirstOrDefault();
 
-                await _unitOfWork.Players.AddAsync(response);
+                if (existingUsername != null)
+                {
+                    return new JsonResult(existingUsername);
+                }
+                else
+                {
+                    _mapper.Map(request, response);
 
-                await _unitOfWork.SaveChangesAsync();
+                    await _unitOfWork.Players.AddAsync(response);
+
+                    await _unitOfWork.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -81,6 +90,11 @@ namespace BMO.Api.Controllers
             try
             {
                 response = await _unitOfWork.Players.GetAsync(id);
+
+                if(response == null)
+                {
+                    return new NotFoundResult();
+                }
             }
             catch (Exception ex)
             {
@@ -106,6 +120,7 @@ namespace BMO.Api.Controllers
 
                     await _unitOfWork.SaveChangesAsync();
                 }
+                else return new NotFoundResult();
             }
             catch (Exception ex)
             {
