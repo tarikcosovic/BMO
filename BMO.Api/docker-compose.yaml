@@ -25,3 +25,13 @@ services:
     environment:
       SA_PASSWORD: Database!2023
       ACCEPT_EULA: Y
+
+  bmo-client:
+    image: tarikcosovic/bmo-client:latest
+    depends_on:
+      - bmo-api  # Ensure the 'bmo-database' service (SQL Server) is started first
+    ports:
+      - 4200:80
+    volumes:
+      - ./angular:/project/angular
+      - /project/angular/node_modules
