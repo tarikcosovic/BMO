@@ -40,7 +40,7 @@ namespace BMO.Api.Controllers
 
             try
             {
-                var existingUsername = (await _unitOfWork.Players.Where(x => x.Username == request.Username)).FirstOrDefault();
+                var existingUsername = (await _unitOfWork.Players.Where(x => x.Username == request.Username && x.DeviceId == request.DeviceId)).FirstOrDefault();
 
                 if (existingUsername != null)
                 {

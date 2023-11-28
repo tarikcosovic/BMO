@@ -8,6 +8,7 @@ using System.Net;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using System.Threading;
+using System.Text.Json.Nodes;
 
 namespace BMO.Api.Controllers
 {
@@ -40,18 +41,31 @@ namespace BMO.Api.Controllers
                 _mapper.Map(request, response);
 
                 var scores = _unitOfWork.Scores.Where(x => x.GameId == request.GameId).Result;
-
-                var currentPlayerHighscore = scores.FirstOrDefault(x => x.PlayerId == request.PlayerId)?.Value ?? 0;
-
                 var scoreCount = scores.Count();
 
+                var currentPlayerHighscore = scores.FirstOrDefault(x => x.PlayerId == request.PlayerId);
                 minScore = scoreCount > 0 ? scores.Select(x => x.Value).Min() : 0;
 
-                if ((scoreCount < 100 || request.Value > minScore) && (request.Value > currentPlayerHighscore))
+                if ((scoreCount < 100 || request.Value > minScore))
                 {
-                    await _unitOfWork.Scores.AddAsync(response);
+                    if(currentPlayerHighscore is not null && request.Value > currentPlayerHighscore?.Value)
+                    {
+                        currentPlayerHighscore.Value = request.Value;
 
-                    await _unitOfWork.SaveChangesAsync();
+                        await _unitOfWork.SaveChangesAsync();
+
+                        response = currentPlayerHighscore;
+                    }
+                    else if(currentPlayerHighscore is null)
+                    {
+                        await _unitOfWork.Scores.AddAsync(response);
+
+                        await _unitOfWork.SaveChangesAsync();
+                    }
+                    else if(request.Value < currentPlayerHighscore?.Value)
+                    {
+                        return new JsonResult(new { StatusCode = 200, Value = "The sent score is not the best personal score of the selected player, the personal score to beat is: " + currentPlayerHighscore?.Value });
+                    }    
 
                     return new JsonResult(response);
                 }
@@ -98,6 +112,32 @@ namespace BMO.Api.Controllers
             }
 
             return new JsonResult(response);
+        }
+
+        [AllowAnonymous]
+        [HttpGet("top-five/{gameId}")]
+        public async Task<IActionResult> GetTopFiveScoresAsync(int gameId)
+        {
+            IEnumerable<Score> response = Enumerable.Empty<Score>();
+
+            try
+            {
+                response = await _unitOfWork.Scores.GetTopScoresAsync(gameId);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error while making an api call: GetScores - Score");
+            }
+
+            return new JsonResult(new
+            {
+                first = new { value = response?.ElementAt(0).Value, username = response?.ElementAt(0).Player?.Username},
+
+                second = new { value = response?.ElementAt(1).Value, username = response?.ElementAt(1).Player?.Username },
+                third = new { value = response?.ElementAt(2).Value, username = response?.ElementAt(2).Player?.Username },
+                fourth = new { value = response?.ElementAt(3).Value, username = response?.ElementAt(3).Player?.Username },
+                fifth = new { value = response?.ElementAt(4).Value, username = response?.ElementAt(4).Player?.Username },
+            });
         }
 
         [AllowAnonymous]

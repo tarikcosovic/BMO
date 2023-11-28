@@ -32,6 +32,3 @@ services:
       - bmo-api  # Ensure the 'bmo-database' service (SQL Server) is started first
     ports:
       - 4200:4200
-    volumes:
-      - ./angular:/project/angular
-      - /project/angular/node_modules

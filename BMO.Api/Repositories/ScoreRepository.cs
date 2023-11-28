@@ -14,7 +14,7 @@ namespace BMO.Api.Repositories
 
         public async Task<List<Score>> GetTopScoresAsync(long gameId, CancellationToken cancellationToken = default)
         {
-            return await BmodbContext.Scores.Where(x => x.GameId == gameId).Include(player => player.Player).Select(x => new Score { Value = x.Value, Player = x.Player, CreatedDate = x.CreatedDate }).ToListAsync(cancellationToken);
+            return await BmodbContext.Scores.Where(x => x.GameId == gameId).Include(player => player.Player).Select(x => new Score { Value = x.Value, Player = x.Player, CreatedDate = x.CreatedDate }).OrderByDescending(x => x.Value).ToListAsync(cancellationToken);
         }
 
         public async Task<Score?> GetScoreByGameAndUsername(long gameId, string username, CancellationToken cancellationToken = default)
